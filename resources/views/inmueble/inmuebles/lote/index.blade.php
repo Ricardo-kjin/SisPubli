@@ -1,0 +1,125 @@
+@extends('admin.layouts.dashboard')
+
+@section('content')
+
+<div class="row py-lg-2">
+    <div class="col-md-6">
+        <h2>Lista de Inmuebles</h2>
+    </div>
+    <div class="col-md-6">
+        <a class="nav-link dropdown-toggle float-md-right" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="btn btn-success">Agregar Inmueble </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+            <a class="dropdown-item" href="{{ route('proyectos.create') }}" style="color: green">Proyecto</a>
+            <a class="dropdown-item" href="{{ route('apartamentos.create') }}" style="color: green">Apartamento </a>
+            <a class="dropdown-item" href="{{ route('inmuebles.create') }}" style="color: green">Inmueble particular</a>
+            <a class="dropdown-item" href="{{ route('localcomercials.create') }}" style="color: green">Local Comercial</a>
+            <a class="dropdown-item" href="{{ route('lotes.create') }}" style="color: green">Lote</a>
+
+          </div>
+
+        {{-- <a href="/inmuebles/create" class="btn btn-success btn-lg float-md-right" role="button" aria-pressed="true"><b class="fas fa-plus"></b> Agregar tipo  </a> --}}
+    </div>
+</div>
+
+<!-- DataTables Example -->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Data Table Example</div>
+    <div class="card-body">
+        <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Direccion</th>
+                <th>Superficies</th>
+                <th>Habitaciones</th>
+                <th>Baños</th>
+                <th>Pisos</th>
+                <th>Garajes</th>
+                <th>Foto Portada</th>
+                <th>Tools</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Direccion</th>
+                <th>Superficies</th>
+                <th>Habitaciones</th>
+                <th>Baños</th>
+                <th>Pisos</th>
+                <th>Garajes</th>
+                <th>Foto Portada</th>
+                <th>Tools</th>
+            </tr>
+            </tfoot>
+            <tbody>
+                @foreach ($inmuebles as $inmueble)
+                    <tr>
+                        <td>{{ $inmueble['id'] }}</td>
+                        <td>{{ $inmueble['direccion'] }}</td>
+                        <td>{{ $inmueble['area_terreno'] }}{{ $inmueble['area_construida'] }}{{ $inmueble['area_libre'] }}</td>
+                        <td>{{ $inmueble['habitaciones'] }}</td>
+                        <td>{{ $inmueble['baños'] }}</td>
+                        <td>{{ $inmueble['pisos'] }}</td>
+                        <td>{{ $inmueble['garajes'] }}</td>
+                        <td>{{ $inmueble['descripcion'] }}</td>
+
+                        <td width="8%">
+                            <a href="/inmuebles/{{ $inmueble['id'] }}"><i class="fa fa-eye"></i></a>
+                            <a href="/inmuebles/{{ $inmueble['id'] }}/edit"><i class="fa fa-edit"></i></a>
+                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-inmuebleid="{{$inmueble['id']}}"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+<!-- delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¿Estas seguguro de querer eliminar?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        </div>
+        <div class="modal-body">Seleccione "eliminar" si realmente desea eliminar este inmueble.</div>
+        <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <form method="POST" action="">
+            @method('DELETE')
+            @csrf
+            <input type="hidden" id="inmueble_id" name="inmueble_id" value="">
+            <a class="btn btn-primary" onclick="$(this).closest('form').submit();">Eliminar</a>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+@section('js_inmueble_page')
+
+<script>
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var inmueble_id = button.data('inmuebleid')
+
+        var modal = $(this)
+        modal.find('.modal-footer #inmueble_id').val(inmueble_id)
+        modal.find('form').attr('action','/inmuebles/' + inmueble_id);
+    })
+</script>
+
+@endsection
+
+@endsection
