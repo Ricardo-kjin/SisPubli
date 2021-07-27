@@ -9,7 +9,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
             <h1>About Me</h1>
-            <span class="subheading">This is what I do.</span>
+            <span class="subheading">This is what I do.a</span>
           </div>
         </div>
       </div>
