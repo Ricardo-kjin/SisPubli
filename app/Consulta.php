@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tipopublicacion extends Model
+class Consulta extends Model
 {
+    //
     public function publicacion(){
-        return $this->hasMany(Publicacion::class);
+        return $this->belongsTo(Publicacion::class);
     }
 }

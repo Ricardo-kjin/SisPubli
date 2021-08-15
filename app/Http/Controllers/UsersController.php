@@ -65,13 +65,14 @@ class UsersController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
             'password' => 'required|between:8,255|confirmed',
-            'password_confirmation' => 'required'
+            'password_confirmation' => 'required',
+            'nit'=>'required',
         ]);
 
 
         $tipo=TipoUsuario::create([
             'profesion'=>'Particular',
-            'nit_agente'=>'ND',
+            'nit_agente'=>$request->nit,
             'nombre_empresa'=>'ND',
             'direccion_empresa'=>'ND',
             'registro_empresa' =>'ND',
@@ -126,7 +127,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-
+        // dd($user->tipousuarios->nit_agente);
         $tipo=TipoUsuario::findOrFail($user->id);
         $grupos=Grupo::where('estado','1')->orderBy('id_grupos','asc')->get();
         //  dd($grupos['0']->nombre,$user->grupos->first()->nombre);
@@ -155,26 +156,28 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //  dd($request,$user->grupos->isEmpty());
-                //validate the fields
-                $request->validate([
-                    'name' => 'required|max:255',
-                    'email' => 'required|email|max:255',
-                    'password' => 'confirmed',
-                ]);
+        //validate the fields
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'confirmed',
+        ]);
+        $tipouser=TipoUsuario::find($user->id_tipo_usuarios);
+        $tipouser->nit_agente=$request->nit;
+        $tipouser->save();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->telefono = $request->telefono;
+        if($request->password != null){
+            $user->password = Hash::make($request->password);
+        }
+        if (!$user->grupos->isEmpty()) {
+            $user->grupos()->detach();
+        }
 
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->telefono = $request->telefono;
-                if($request->password != null){
-                    $user->password = Hash::make($request->password);
-                }
-                if (!$user->grupos->isEmpty()) {
-                    $user->grupos()->dettach();
-                }
-
-                $user->save();
-                $user->grupos()->attach($request->grupo);
-                return redirect('/users');
+        $user->save();
+        $user->grupos()->attach($request->grupo);
+        return redirect('/users');
     }
 
     /**

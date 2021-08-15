@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Factura;
-use App\User;
+use App\Seguimiento;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class FacturaController extends Controller
+class SeguimientoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +14,7 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        $id=Auth::user()->id;
-        $userfacturas=User::where('id',$id)->first();
-        // $userfacturas->cantidad_publicaciones=0;
-        // $userfacturas->save();
-        // dd($userfacturas);
-        //  dd($userfacturas->notaventas()->with('factura')->get());
-        //  dd($userfacturas->notaventas->first()->factura);
-        return view('venta.factura.index',['userfacturas'=>$userfacturas]);
+        //
     }
 
     /**
@@ -50,24 +41,21 @@ class FacturaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Seguimiento  $seguimiento
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Seguimiento $seguimiento)
     {
-        $factura=Factura::find($id);
-        // dd($factura);
-        // dd($factura->notaventa->oferta->plane);
-        return view('venta.factura.show',['factura'=>$factura]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Seguimiento  $seguimiento
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Seguimiento $seguimiento)
     {
         //
     }
@@ -76,10 +64,10 @@ class FacturaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Seguimiento  $seguimiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Seguimiento $seguimiento)
     {
         //
     }
@@ -87,10 +75,10 @@ class FacturaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Seguimiento  $seguimiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Seguimiento $seguimiento)
     {
         //
     }

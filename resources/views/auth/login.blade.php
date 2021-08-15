@@ -26,7 +26,7 @@
 
                   <div class="form-label-group">
                     <input type="password" id="inputPassword" class="form-control @error('password') is-invalid @enderror" name="password"  placeholder="Password" required autocomplete="current-password">
-                    <label for="inputPassword">Password</label>
+                    <label for="inputPassword">Contraseña</label>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

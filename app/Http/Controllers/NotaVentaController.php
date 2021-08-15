@@ -6,6 +6,7 @@ use App\Factura;
 use App\NotaVenta;
 use App\Oferta;
 use App\TipoPagos;
+use App\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +20,29 @@ class NotaVentaController extends Controller
      */
     public function index()
     {
+        $id=Auth::user()->id;
+        $userfacturas=User::where('id',$id)->first();
 
+        // dd($userfacturas->grupos->first()->nombre);
+        if ($userfacturas->grupos->first()->nombre=='Particular') {
+            $ofertas=Oferta::where('id_planes','<=','2')->where('estado',1)->orderBy('id_ofertas')->get();
+            // dd($ofertas);
+            return view('venta.notaventa.index',['ofertas'=>$ofertas]);
+        }
+        if ($userfacturas->grupos->first()->nombre=='Agente') {
+            $ofertas=Oferta::where('id_planes','<=','3')->where('estado',1)->orderBy('id_ofertas')->get();
+            // dd($ofertas);
+            return view('venta.notaventa.index',['ofertas'=>$ofertas]);
+        }
+        if ($userfacturas->grupos->first()->nombre=='Empresa') {
+            $ofertas=Oferta::where('id_planes','=','4')->where('estado',1)->orderBy('id_ofertas')->get();
+            // dd($ofertas);
+            return view('venta.notaventa.index',['ofertas'=>$ofertas]);
+        }
         $ofertas=Oferta::where('estado',1)->orderBy('id_ofertas')->get();
-        // dd($ofertas);
+            // dd($ofertas);
         return view('venta.notaventa.index',['ofertas'=>$ofertas]);
+
     }
 
     /**
@@ -76,6 +96,13 @@ class NotaVentaController extends Controller
         $notaventa->id_ofertas=$oferta->id_ofertas;
         // dd($notaventa);
         $notaventa->save();
+
+        $sum=0 + Auth::user()->cantidad_publicaciones;
+        $id=Auth::user()->id;
+        $userfacturas = User::find($id);
+        $userfacturas->cantidad_publicaciones=$sum + $oferta->numero_publicaciones;
+        $userfacturas->save();
+
         return redirect('/facturas');
 
     }
@@ -123,8 +150,8 @@ class NotaVentaController extends Controller
             'duracion'=>$oferta->duracion,
             'descripcion'=>$oferta->descripcion,
             'numero_publicaciones'=>$oferta->numero_publicaciones,
-            'usuario'=>Auth::user()->name//
-
+            'usuario'=>Auth::user()->name,//
+            'nit'=>Auth::user()->tipousuarios->nit_agente
         ];
         // dd($array);
         $tipopagos=TipoPagos::where('estado',1)->orderBy('id_tipo_pagos')->get();

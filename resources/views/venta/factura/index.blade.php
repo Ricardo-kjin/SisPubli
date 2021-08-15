@@ -16,9 +16,15 @@
         <div class="row">
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
-                    <p>Correo:{{$userfacturas->email}}</p>
-                    <p>Fecha de Nacimiento:{{$userfacturas->fech_nac}}</p>
-                    <p>Tipo de Usuario:{{$userfacturas->tipousuarios->nombre}}</p>
+                    <p>Correo: {{$userfacturas->email}}</p>
+                    <p>Fecha de Nacimiento: {{$userfacturas->fecha_nac}}</p>
+                    <p>Grupo:  {{$userfacturas->grupos->first()->nombre}}</p>
+                    @if (Auth::user()->grupos->first()->nombre=='Empresa')
+                        <p>NIT:  {{$userfacturas->tipousuarios->nit_empresa}}</p>
+                    @else
+                        <p>NIT:  {{$userfacturas->tipousuarios->nit_agente}}</p>
+                    @endif
+
                     {{-- <p>Area libre:{{$inmueble->area_libre}}</p>
                     <p>Zona:{{$inmueble->zona->nombre}}</p> --}}
                     {{-- <p>Habitaciones:{{$inmueble->habitaciones}}</p>
@@ -55,41 +61,43 @@
 						<thead style="background-color:#f38c8c">
                             <th>Cod Factura</th>
 							<th>Oferta</th>
-                            <th>Inicio</th>
+                            {{-- <th>Inicio</th>
                             <th>Final</th>
-							<th>N° de publicaciones</th>
+							<th>N° de publicaciones</th> --}}
 							<th>Duracion</th>
 							{{-- <th>Descripcion</th> --}}
                             <th>Emision</th>
 							<th>Iva</th>
 							<th>Costo Bruto</th>
 							<th>Costo Total</th>
+                            <th>Tools</th>
 						</thead>
 						<tfoot>
 							<th></th>
 							<th></th>
+							{{-- <th></th>
 							<th></th>
-							<th></th>
-							<th></th>
+							<th></th> --}}
 							<th></th>
                             <th></th>
 							<th></th>
 							<th></th>
 							<th></th>{{-- <th><h4 id="total"><strong>{{$userfacturas->notaventas->first()->factura['costo_neto']}}</strong></h4></th> --}}
-						</tfoot>
+                            <th></th>
+                        </tfoot>
 						<tbody>
                             @foreach ($userfacturas->notaventas as $venta)
                             <tr>
                                 <td>{{$venta->factura['num_factura']}}</td>
                                 <td>{{$venta->oferta['nombre']}}</td>
                                 {{-- <input type="text" name="nombre_oferta" class="form-control" id="nombre_oferta" value="{{ $array['nombre_oferta'] }}" hidden="true"> --}}
-                                <td>{{$venta['fecha_inicio']}}</td>
+                                {{-- <td>{{$venta['fecha_inicio']}}</td> --}}
                                 {{-- <input type="text" name="fecha_inicio" class="form-control" id="fecha_inicio" value="{{ $venta['fecha_inicio'] }}" hidden="true"> --}}
-                                <td>{{$venta['fecha_final']}}</td>
+                                {{-- <td>{{$venta['fecha_final']}}</td> --}}
                                 {{-- <input type="text" name="fecha_fin" class="form-control" id="fecha_fin" value="{{ $venta['fecha_fin'] }}" hidden="true"> --}}
-                                <td><center>{{$venta->oferta['numero_publicaciones']}}</center></td>
+                                {{-- <td><center>{{$venta->oferta['numero_publicaciones']}}</center></td> --}}
                                 {{-- <input type="text" name="numero_publicaciones" class="form-control" id="numero_publicaciones" value="{{ $venta['numero_publicaciones'] }}" hidden="true"> --}}
-                                <td>{{$venta->oferta['duracion']}}</td>
+                                <td>{{$venta->oferta->duracion}}</td>
                                 {{-- <input type="text" name="duracion" class="form-control" id="duracion" value="{{ $venta['duracion'] }}" hidden="true"> --}}
                                 {{-- <td>{{$venta->oferta['descripcion']}}</td> --}}
                                 <td>{{$venta->factura['fecha_emicion']}}</td>
@@ -100,6 +108,9 @@
                                 {{-- <input type="text" name="costo_bruto" class="form-control" id="costo_bruto" value="{{ $venta['costo_bruto'] }}" hidden="true"> --}}
                                 <td>{{$venta->factura['costo_neto']}}</td>
                                 {{-- <input type="text" name="costo_neto" class="form-control" id="costo_neto" value="{{ $array['costo_neto'] }}" hidden="true"> --}}
+                                <td>
+                                    <a href="/facturas/{{ $venta->factura->id_facturas }}"><i class="fa fa-eye">
+                                </td>
                             </tr>
                             @endforeach
 

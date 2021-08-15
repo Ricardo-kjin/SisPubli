@@ -17,4 +17,7 @@ class NotaVenta extends Model
     public function oferta(){
         return $this->belongsTo(Oferta::class,'id_ofertas','id_ofertas');
     }
+    public function publicacions(){
+        return $this->hasMany(Publicacion::class,'nota_venta_id','id_nota_ventas');
+    }
 }

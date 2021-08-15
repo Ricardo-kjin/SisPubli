@@ -2,7 +2,8 @@
 
 @section('content')
 
-
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="/css/styles.css" rel="stylesheet" />
 <div class="row">
     <!-- Header-->
     {{-- <header class="bg-dark py-0"> --}}
@@ -19,9 +20,7 @@
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 {{-- <div class="row"> --}}
                     @foreach ($ofertas as $oferta)
-                    @if (\Auth::user()->grupos->first()->nombre=='Administrador' && $oferta->id_planes<=4)
-
-
+                    {{-- @if (\Auth::user()->grupos->first()->nombre=='Administrador' && $oferta->id_planes<=4) --}}
                         <div class="row">
                             <div class="col mb-4">
                                 <div class="panel panel-default">
@@ -31,7 +30,7 @@
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
-                                            <h5 class="fw-bolder">{{$oferta->nombre}}</h5>
+                                            <h6 class="fw-bolder">{{$oferta->nombre}}</h6>
                                             <!-- Product reviews-->
                                             <div class="d-flex justify-content-center small text-warning mb-2">
                                                 @if ($oferta->id_planes>=4)
@@ -66,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    {{-- @endif --}}
                     @endforeach
 
                 {{-- </div> --}}
@@ -290,5 +289,6 @@
 </script>
 
 @endsection
-
+  <!-- Core theme JS-->
+  <script src="/js/scripts.js"></script>
 @endsection

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Foto;
+use App\Publicacion;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $publicacions=Publicacion::with('NotaVenta')->get();
+        // dd($publicacions->first()->user->name);
+        // dd($publicacions);
+        return view('welcome',['publicacions'=>$publicacions]);
+    }
+    public function show($id){
+        $publicacion=Publicacion::find($id);
+        $fotos=Foto::where('inmueble_id',$publicacion->inmueble->id)->paginate(3);
+        // dd($fotos);
+        return view('/show',['publicacion'=>$publicacion,'fotos'=>$fotos]);
     }
 }

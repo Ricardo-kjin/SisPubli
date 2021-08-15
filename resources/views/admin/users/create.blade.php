@@ -24,6 +24,12 @@
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <div class="form-group">
+                <label for="nit">NIT</label>
+                <input type="text" nit="nit" class="form-control" id="nit" placeholder="Nombre..." value="{{ old('nit') }}" required>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" name="email" class="form-control" id="email" placeholder="Email..." value="{{ old('email') }}">
             </div>

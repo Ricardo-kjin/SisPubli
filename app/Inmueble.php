@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Inmueble extends Model
 {
 
+
     //muchos inmuebles pertenece a una zona
 
     public function zona (){
@@ -39,5 +40,13 @@ class Inmueble extends Model
     //un proyecto tiene muchos inmuebles
     public function proyecto(){
         return $this->hasMany(Inmueble::class,'proyecto_id','id');
+    }
+    //un inmueble tiene muchas fotos
+    public function fotos(){
+        return $this->hasMany(Foto::class);
+    }
+    //un inmueble puede estar en varias publicaciones
+    public function publicacions(){
+        return $this->hasMany(Publicacion::class);
     }
 }

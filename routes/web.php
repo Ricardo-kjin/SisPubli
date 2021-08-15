@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/about', function () {
     return view('about');
 });
@@ -27,17 +27,20 @@ Route::get('/contact', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home/{id}', 'HomeController@show');
+
 
 Route::get('/admin', 'AdminController@index');
 
 //Route::get('/posts/create', 'PostsController@create');
-//Route::get('/posts/{post}', 'PostsController@show');
+//Route::get('/posts/{post}', 'PostsController@show');/////////////////////////
 //Route::get('/posts', 'PostsController@index');
 //Route::post('/posts', 'PostsController@store');
-//Route::get('/posts/{post}/edit', 'PostsController@edit');
-//Route::patch('/posts/{post}', 'PostsController@update');
-//Route::delete('/posts/{post}', 'PostsController@destroy');
+//Route::get('/posts/{post}/edit', 'PostsController@edit');////////////////////
+//Route::patch('/posts/{post}', 'PostsController@update');/////////////////////
+//Route::delete('/posts/{post}', 'PostsController@destroy');///////////////////
 
 //LOGIN
 Route::resource('/users', 'UsersController');
@@ -64,6 +67,8 @@ Route::resource('/proyectos','ProyectoController');
 Route::resource('/apartamentos','ApartamentoController');
 Route::resource('/localcomercials', 'LocalComercialController');
 Route::resource('/lotes', 'LoteController');
+
+Route::resource('/fotos', 'FotoController');
 //Route::resource('/tipoinmuebles', 'TipoInmuebleController');
 
 
@@ -77,6 +82,10 @@ Route::resource('/notaventas','NotaventaController');
 //PUBLICAIONES
 
 Route::resource('/tipopublicacions','TipopublicacionController');
+
+//PUBLICACION
+Route::resource('/publicacions','PublicacionController');
+Route::get('/publicacion/{publicacion}','PublicacionController@crea')->name('crear');
 
 //nota de venta y factura
 

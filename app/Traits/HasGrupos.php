@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Grupo;
 use App\NotaVenta;
+use App\Publicacion;
 use App\TipoUsuario;
 
 trait HasGrupos
@@ -16,7 +17,7 @@ trait HasGrupos
         return $this->belongsToMany(Grupo::class,'grupos_users','id_user','id_grupos');
     }
 
-        /**
+    /**
      * @return mixed
      */
     public function accesos()
@@ -34,10 +35,15 @@ trait HasGrupos
         //la clase padre--- el FK id que tiene el hijo---el id del padre
         return $this->hasMany(NotaVenta::class, 'id_usuarios');
     }
+
     //un usario tiene muchos inmuebles
 
-    public function inmuebles (){
+    public function inmuebles(){
         return $this->hasMany(Inmueble::class);
+    }
+
+    public function publicacions(){
+        return $this->hasMany(Publicacion::class);
     }
 
     public function obtenerIp(){

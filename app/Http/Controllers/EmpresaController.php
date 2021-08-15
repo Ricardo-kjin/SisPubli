@@ -172,7 +172,7 @@ class EmpresaController extends Controller
             $user->password = Hash::make($request->password);
         }
         if (!$user->grupos->isEmpty()) {
-            $user->grupos()->dettach();
+            $user->grupos()->detach();
         }
 
         $user->save();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Foto;
 use App\Inmueble;
 use App\Servicio;
 use App\TipoInmueble;
@@ -46,7 +47,7 @@ class InmuebleController extends Controller
      */
     public function store(Request $request)
     {
-               // dd($request);
+        // dd($request);
         // dd($request->image);
         $data=request()->validate([
             'direccion' => 'required|max:255',
@@ -124,20 +125,23 @@ class InmuebleController extends Controller
     public function show(Inmueble $inmueble)
     {
         // dd($inmueble->proyecto);
+        $fotos=Foto::where('inmueble_id',$inmueble->id)->paginate(3);
+        // $listfotos=$inmueble->fotos;
+        // dd($fotos);
         if ($inmueble->tipoinmueble_id=='1') {
-            return view('inmueble.inmuebles.proyecto.show',['inmueble'=>$inmueble]);
+            return view('inmueble.inmuebles.proyecto.show',['inmueble'=>$inmueble],['fotos'=>$fotos]);
         }
         if ($inmueble->tipoinmueble_id=='2') {
-                return view('inmueble.inmuebles.apartamento.show',['inmueble'=>$inmueble]);
+                return view('inmueble.inmuebles.apartamento.show',['inmueble'=>$inmueble],['fotos'=>$fotos]);
         }
         if ($inmueble->tipoinmueble_id=='3') {
-            return view('inmueble.inmuebles.show',['inmueble'=>$inmueble]);
+            return view('inmueble.inmuebles.show',['inmueble'=>$inmueble],['fotos'=>$fotos]);
         }
         if ($inmueble->tipoinmueble_id=='4') {
-            return view('inmueble.inmuebles.comercial.show',['inmueble'=>$inmueble]);
+            return view('inmueble.inmuebles.comercial.show',['inmueble'=>$inmueble],['fotos'=>$fotos]);
         }
         if ($inmueble->tipoinmueble_id=='5') {
-            return view('inmueble.inmuebles.lote.show',['inmueble'=>$inmueble]);
+            return view('inmueble.inmuebles.lote.show',['inmueble'=>$inmueble],['fotos'=>$fotos]);
         }
     }
 

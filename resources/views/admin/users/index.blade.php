@@ -60,15 +60,16 @@
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}} </td>
-                    @if ($user->tipousuarios->nit_agente=="ND")
-                        @if ($user->tipousuarios->nit_empresa=="ND")
+                    @if ($user->tipousuarios->nit_empresa=="ND")
+                        @if ($user->tipousuarios->profesion=="Particular")
                             <td>Particular</td>
                         @else
-                            <td>Empresa</td>
+                            <td>Agente</td>
                         @endif
 
                     @else
-                        <td>Agente</td>
+                        <td>Empresa</td>
+
                     @endif
                     <td>
                         @if (isset($user->grupos))

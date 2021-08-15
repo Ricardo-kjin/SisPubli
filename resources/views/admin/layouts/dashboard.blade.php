@@ -20,8 +20,7 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Bootstrap icons-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-  <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="/css/styles.css" rel="stylesheet" />
+
 
   <!-- Custom styles for this template-->
   <link href="/css/admin/sb-admin.css" rel="stylesheet">
@@ -57,7 +56,7 @@
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger">9+</span>
+          <span class="badge badge-danger">{{Auth::user()->cantidad_publicaciones}}+</span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
           <a class="dropdown-item" href="#">Action</a>
@@ -163,7 +162,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Caracteristicas:</h6>
           <a class="dropdown-item" href="/tipopublicacions">Tipo Publicaciones</a>
-          <a class="dropdown-item" href="/ofertas">#publicacion</a>
+          <a class="dropdown-item" href="/publicacions">#publicacion</a>
           <a class="dropdown-item" href="/tipopagos">#</a>
           <div class="dropdown-divider"></div>
           <h6 class="dropdown-header">Transacciones:</h6>
@@ -269,8 +268,7 @@
 
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Core theme JS-->
-  <script src="/js/scripts.js"></script>
+
 
     @yield('js_user_page')
     @yield('js_grupo_page')
@@ -290,6 +288,11 @@
 
 
     @yield('js_plane_page')
+
+
+    @yield('js_publicacions_page')
+    @yield('js_publicacion_page')
+
 
 
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoPagosTable extends Migration
+class CreateFotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTipoPagosTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_pagos', function (Blueprint $table) {
-            $table->id('id_tipo_pagos');
-            $table->string('nombre',100);
-            $table->text('descripcion');
-            // $table->string('num_comprobante',20);borrado por dropcolum
-            $table->boolean('estado');
+        Schema::create('fotos', function (Blueprint $table) {
+            $table->id();
+            $table->string('img')->nullable();
+            $table->unsignedInteger('inmueble_id');
             $table->timestamps();
+
+            $table->foreign('inmueble_id')->references('id')->on('inmuebles');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateTipoPagosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_pagos');
+        Schema::dropIfExists('fotos');
     }
 }

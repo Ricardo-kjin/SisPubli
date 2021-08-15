@@ -14,9 +14,19 @@
                 @csrf
 
               <div class="form-label-group">
-                <input type="text" id="inputUserame" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Username" required autocomplete="name" autofocus>
-                <label for="inputUserame">{{ __('Nombre') }}</label>
+                <input type="text" id="inputUsername" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Username" required autocomplete="name" autofocus>
+                <label for="inputUsername">{{ __('Nombre') }}</label>
                 @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              </div>
+
+              <div class="form-label-group">
+                <input type="text" id="inputNit" class="form-control @error('nit') is-invalid @enderror" nit="nit" value="{{ old('nit') }}" placeholder="Usernit" required autocomplete="nit" autofocus>
+                <label for="inputNit">{{ __('NIT') }}</label>
+                @error('nit')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
