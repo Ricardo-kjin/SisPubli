@@ -49,7 +49,7 @@
 @endsection
 
 @section('js_grupo_page')
-    <script src="/js/admin/bootstrap-tagsinput.js"></script>
+    <script src="{{asset('/js/admin/bootstrap-tagsinput.js')}}"></script>
 
     {{-- <script>
         $(document).ready(function(){

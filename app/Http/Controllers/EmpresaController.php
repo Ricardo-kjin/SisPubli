@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BitacoraHelper;
 use App\TipoUsuario;
 use App\User;
 use DateTime;
@@ -145,6 +146,8 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd(2,$request);
+        BitacoraHelper::insertBitacora('Actualizo usuario');
         //validate the fields
         $request->validate([
             'name' => 'required|max:255',

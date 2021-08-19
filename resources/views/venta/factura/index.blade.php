@@ -16,6 +16,8 @@
         <div class="row">
             <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
                 <div class="form-group">
+                    <a href="{{ route('decargarPDFFacturas') }}" target="_blank" class="btn btn-sm btn-danger">Imprimir Tu lista de Facturas</a>
+                    <a href="{{ route('decargarPDFFacturasUsuarios') }}" target="_blank" class="btn btn-sm btn-success">Imprimir Tu lista de Facturas</a>
                     <p>Correo: {{$userfacturas->email}}</p>
                     <p>Fecha de Nacimiento: {{$userfacturas->fecha_nac}}</p>
                     <p>Grupo:  {{$userfacturas->grupos->first()->nombre}}</p>
@@ -119,9 +121,9 @@
 				</div>
 	</div>
 
-    <div class="card-footer">
+    {{-- <div class="card-footer">
         <a href="{{ url()->previous() }}" class="btn btn-primary">Go Back</a>
-    </div>
+    </div> --}}
 
 </div>
 

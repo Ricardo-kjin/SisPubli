@@ -14,15 +14,13 @@ class CreateBitacorasTable extends Migration
     public function up()
     {
         Schema::create('bitacoras', function (Blueprint $table) {
-            $table->id('id_bitacoras');
-            $table->date('fecha');
-            $table->time('hora');
-            $table->text('descripcion');
-            $table->boolean('estado');
+            $table->id();
+            $table->date('fecha_hora');
+            $table->text('accion');
+            $table->text('maquina_ip');
+            $table->integer('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
-            $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('users')
-            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

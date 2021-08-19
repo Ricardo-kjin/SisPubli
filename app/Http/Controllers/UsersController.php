@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grupo;
+use App\Helpers\BitacoraHelper;
 use App\TipoUsuario;
 use App\User;
 use DateTime;
@@ -127,11 +128,14 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        // dd($user->tipousuarios);
         // dd($user->tipousuarios->nit_agente);
-        $tipo=TipoUsuario::findOrFail($user->id);
+        $tipo=$user->tipousuarios;
         $grupos=Grupo::where('estado','1')->orderBy('id_grupos','asc')->get();
+        // dd($grupos);
         //  dd($grupos['0']->nombre,$user->grupos->first()->nombre);
 //  dd($user->grupos->isEmpty());
+
         if ($tipo->nit_agente=='ND') {
             if ($tipo->nit_empresa=='ND') {
                 //dd($user);
@@ -155,6 +159,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        BitacoraHelper::insertBitacora('Actualizo usuario');
+        // dd(1,$request);
         //  dd($request,$user->grupos->isEmpty());
         //validate the fields
         $request->validate([
@@ -177,6 +183,7 @@ class UsersController extends Controller
 
         $user->save();
         $user->grupos()->attach($request->grupo);
+
         return redirect('/users');
     }
 

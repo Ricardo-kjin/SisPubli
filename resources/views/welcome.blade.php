@@ -3,7 +3,7 @@
 @section('content')
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+  <header class="masthead" style="background-image: url('/img/imagen_portada.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -85,12 +85,16 @@
                 on July 8, 2019</p>
             </div>
             <hr> --}}
-            <!-- Pager -->
-            <div class="clearfix">
+
+
+
+            {{-- <div class="clearfix">
                 <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-            </div>
+            </div> --}}
 
         </div>
+        <!-- Pager -->
+        {{$publicacions->links()}}
     </div>
   </div>
 

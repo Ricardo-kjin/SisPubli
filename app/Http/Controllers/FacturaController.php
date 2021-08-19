@@ -94,4 +94,8 @@ class FacturaController extends Controller
     {
         //
     }
+    public function indexx(){
+        $facturas=Factura::orderBy('id_facturas','desc')->get();
+        return view('venta.factura.indexx',['facturas'=>$facturas]);
+    }
 }

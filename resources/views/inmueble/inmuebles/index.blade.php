@@ -2,6 +2,74 @@
 
 @section('content')
 
+    <!-- Icon Cards-->
+    <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-primary o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-comments"></i>
+              </div>
+              <div class="mr-5">{{$mensaje->numero}} Nuevos Mensajes!</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="/consultas">
+              <span class="float-left">Ver Detalles</span>
+              <span class="float-right">
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-warning o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-list"></i>
+              </div>
+              <div class="mr-5">11 Nuevas Vistas!</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="#">
+              <span class="float-left">Ver Detalles</span>
+              <span class="float-right">
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-success o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-shopping-cart"></i>
+              </div>
+              <div class="mr-5">{{$pub}} Total de inmuebles <br> Publicados! <br>{{$seguimiento->numero}} Seguimientos! </div>
+            </div>
+            {{-- <a class="card-footer text-white clearfix small z-1" href="#">
+              <span class="float-left">Ver detalles</span>
+              <span class="float-right">
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </a> --}}
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-danger o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fas fa-fw fa-life-ring"></i>
+              </div>
+              <div class="mr-5">Publicaciones Disponibles: {{Auth::user()->cantidad_publicaciones}}</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="#">
+              <span class="float-left">Ver detalles</span>
+              <span class="float-right">
+                <i class="fas fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+  </div>
+
 <div class="row py-lg-2">
     <div class="col-md-6">
         <h2>Lista de Inmuebles</h2>
@@ -37,7 +105,7 @@
                 <th>Titulo</th>
                 <th>Direccion</th>
                 <th>Superficie(m2)</th>
-                {{-- <th>Pisos</th> --}}
+                {{-- <th>Nº Seguimiento</th> --}}
                 {{-- <th>Garajes</th> --}}
                 <th>Foto Portada</th>
                 <th>Proyecto</th>
@@ -51,7 +119,7 @@
                 <th>Titulo</th>
                 <th>Direccion</th>
                 <th>Superficie(m2)</th>
-                {{-- <th>Pisos</th> --}}
+                {{-- <th>Nº Seguimiento</th> --}}
                 {{-- <th>Garajes</th> --}}
                 <th>Foto Portada</th>
                 <th>Proyecto</th>
@@ -78,7 +146,7 @@
                         <td>{{ $inmueble['direccion'] }}</td>
                         <td>Total:{{ $inmueble['area_terreno'] }}<br>Construida:{{ $inmueble['area_construida'] }} <br> Libre:{{ $inmueble['area_libre'] }}</td>
 
-                        {{-- <td>{{ $inmueble['pisos'] }}</td> --}}
+                        {{-- <td>{{ $inmueble->publicacions->first()->seguimientos->first()}}</td> --}}
                         {{-- <td>{{ $inmueble['garajes'] }}</td> --}}
                         <td><center><img src="{{ asset('/storage/images/portada_imagen_inmueble/'.$inmueble['foto_principal']) }}" alt="{{ $inmueble['foto_principal'] }}" style="max-height: 100px;"></center></td>
                         <td>{{ $inmueble->tipoinmueble->nombre }}</td>

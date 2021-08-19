@@ -102,7 +102,6 @@
                 @foreach ($zonas as $zona)
                     <option data-zona-id="{{$zona->id}}" data-zona-slug="{{$zona->descripcion}}" value="{{$zona->id}}">{{$zona->nombre}}</option>
                 @endforeach
-
             </select>
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
@@ -117,16 +116,12 @@
         </div>
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
             <label for="servicio"> <b> Seleccione los servicios</b></label>
-
             @foreach ($servicios as $servicio)
-
                     <div class="form-group" >
-
                         {{-- <input type="text" data-role="tagsinput" name="servicios_grupos" class="form-control" id="servicios_grupos" value="{{ old('servicios_grupos') }}"> --}}
                         <input type="checkbox" name="servicio[]" id="{{$servicio->empresa}}" value="{{$servicio->id}}" >
                         <label for="{{$servicio->empresa}}">{{$servicio->nombre}}</label>
                     </div>
-
             @endforeach
         </div>
 

@@ -3,7 +3,7 @@
 @section('content')
 
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="/css/styles.css" rel="stylesheet" />
+  <link href="{{asset('/css/styles.css')}}" rel="stylesheet">
 <div class="row">
     <!-- Header-->
     {{-- <header class="bg-dark py-0"> --}}
@@ -290,5 +290,5 @@
 
 @endsection
   <!-- Core theme JS-->
-  <script src="/js/scripts.js"></script>
+  <script src="{{asset('/js/scripts.js')}}"></script>
 @endsection

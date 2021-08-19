@@ -12,6 +12,11 @@
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <a href="{{ route('decargarPDFFactura',['id'=>$factura->id_facturas]) }}" target="_blank" class="btn btn-sm btn-danger">Imprimir PDF Factura</a>
+        <a href="{{ route('decargarPDFFactura',['id'=>$factura->id_facturas]) }}" target="_blank" class="btn btn-sm btn-success">Imprimir Factura</a>
+
+    </div>
     <div class="card-body">
         <div class="row">
             {{-- <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12"> --}}
@@ -129,7 +134,7 @@
 	</div>
 
     <div class="card-footer">
-        <a href="{{url()->previous() }}" class="btn btn-primary">Go Back</a>
+        <a href="{{url()->previous()}}" class="btn btn-primary">Go Back</a>
     </div>
 
 </div>

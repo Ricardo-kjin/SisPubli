@@ -16,12 +16,12 @@ class CreateTipoUsuariosTable extends Migration
         Schema::create('tipo_usuarios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('profesion',100);
-            $table->string('nit_agente',20)->null;
-            $table->string('nombre_empresa',100)->null;
-            $table->string('direccion_empresa',200)->null;
-            $table->string('registro_empresa',20)->null;
-            $table->string('telefono_empresa',20)->null;
-            $table->string('nit_empresa',20)->null;
+            $table->string('nit_agente',20)->nullable();
+            $table->string('nombre_empresa',100)->nullable();
+            $table->string('direccion_empresa',200)->nullable();
+            $table->string('registro_empresa',20)->nullable();
+            $table->string('telefono_empresa',20)->nullable();
+            $table->string('nit_empresa',20)->nullable();
             $table->boolean('estado');
             $table->timestamps();
             //$table->unsignedBigInteger('id_usuarios');

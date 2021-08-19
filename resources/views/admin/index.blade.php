@@ -18,10 +18,10 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-comments"></i>
                 </div>
-                <div class="mr-5">26 New Messages!</div>
+                <div class="mr-5">26 Nuevos Mensajes!</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left">View Details</span>
+                <span class="float-left">Ver Detalles</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                 </span>
@@ -34,10 +34,10 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-list"></i>
                 </div>
-                <div class="mr-5">11 New Tasks!</div>
+                <div class="mr-5">11 Nuevas Vistas!</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left">View Details</span>
+                <span class="float-left">Ver Detalles</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                 </span>
@@ -50,10 +50,10 @@
                 <div class="card-body-icon">
                   <i class="fas fa-fw fa-shopping-cart"></i>
                 </div>
-                <div class="mr-5">123 New Orders!</div>
+                <div class="mr-5">12 Total de inmuebles <br> Publicados!</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left">View Details</span>
+                <span class="float-left">Ver detalles</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                 </span>
@@ -69,7 +69,7 @@
                 <div class="mr-5">Publicaciones Disponibles: {{Auth::user()->cantidad_publicaciones}}</div>
               </div>
               <a class="card-footer text-white clearfix small z-1" href="#">
-                <span class="float-left">View Details</span>
+                <span class="float-left">Ver detalles</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>
                 </span>

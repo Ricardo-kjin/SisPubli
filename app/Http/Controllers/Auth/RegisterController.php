@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Empresa;
+use App\Grupo;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\TipoUsuario;
@@ -65,6 +67,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // $int=Empresa::count();
+        // dd($int==0);
+
         // return User::create([
         //     'name' => $data['name'],
         //     'email' => $data['email'],

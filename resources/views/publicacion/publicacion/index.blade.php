@@ -5,7 +5,9 @@
 <div class="row py-lg-2">
     <div class="col-md-6">
         <h2>Lista de Publicaciones</h2>
+
     </div>
+
 </div>
 
 <!-- DataTables Example -->
@@ -14,6 +16,9 @@
         <i class="fas fa-table"></i>
         Data Table Example</div> --}}
     <div class="card-body">
+        <div class="form-group">
+            <a href="{{ route('decargarPDFPublicaciones') }}" target="_blank" class="btn btn-sm btn-danger">Imprimir Tu lista de Publicaciones</a>
+        </div>
         <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>

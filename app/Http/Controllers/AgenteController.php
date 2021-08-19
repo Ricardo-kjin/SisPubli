@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Grupo;
+use App\Helpers\BitacoraHelper;
 use App\TipoUsuario;
 use App\User;
 use DateTime;
@@ -126,6 +127,8 @@ class AgenteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd(3,$request);
+        BitacoraHelper::insertBitacora('Actualizo usuario');
                 //validate the fields
         $request->validate([
             'name' => 'required|max:255',

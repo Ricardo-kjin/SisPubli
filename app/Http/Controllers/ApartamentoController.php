@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BitacoraHelper;
 use App\Inmueble;
 use App\Servicio;
 use App\TipoInmueble;
@@ -92,8 +93,8 @@ class ApartamentoController extends Controller
         $inmueble->garajes=$request->garajes;
         $inmueble->descripcion=$request->descripcion;
         // $inmueble->foto_principal=$request->foto_principal;
-        // $inmueble->total_cupo=$request->total_cupos;
-        // $inmueble->cupo_ocupado=$request->cupo_ocupado;
+        $inmueble->total_cupo=0;
+        $inmueble->cupo_ocupado=0;
         $inmueble->foto_principal=$newFileName;
         $inmueble->zona_id=$request->zona;
         $inmueble->tipoinmueble_id=$tipoinm->first()->id;
@@ -108,6 +109,7 @@ class ApartamentoController extends Controller
                 $inmueble->servicios()->attach($serv);
             }
         }
+        BitacoraHelper::insertBitacora('Creo un inmueble');
         // dd($inmueble->id);
         // $id=$proyecto->id;
         return redirect('/inmuebles');
@@ -219,6 +221,7 @@ class ApartamentoController extends Controller
                 $inmueble->servicios()->attach($serv);
             }
         }
+        BitacoraHelper::insertBitacora('Actualizo un inmueble');
         // dd($inmueble->servicios);
         // $post->title = request('title');
         // $post->content = request('post_content');

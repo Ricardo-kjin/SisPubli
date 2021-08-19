@@ -12,10 +12,10 @@
   <title>SB Admin - Dashboard</title>
 
   <!-- Custom fonts for this template-->
-  <link href="/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+  <link href="{{asset('/vendor/fontawesome-free/css/all.css')}}" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="{{asset('/vendor/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
 
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Bootstrap icons-->
@@ -23,7 +23,7 @@
 
 
   <!-- Custom styles for this template-->
-  <link href="/css/admin/sb-admin.css" rel="stylesheet">
+  <link href="{{asset('/css/admin/sb-admin.css')}}" rel="stylesheet">
 
   @yield('css_grupo_page')
 
@@ -33,14 +33,14 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand mr-1" href="/">Sis. Publicitario</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
 
     <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+    {{-- <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
@@ -49,14 +49,15 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
 
     <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
+    <ul class="navbar-nav ml-auto" >
       <li class="nav-item dropdown no-arrow mx-1">
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
+
           <span class="badge badge-danger">{{Auth::user()->cantidad_publicaciones}}+</span>
+          <i class="fas fa-bell fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
           <a class="dropdown-item" href="#">Action</a>
@@ -65,10 +66,11 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
-      <li class="nav-item dropdown no-arrow mx-1">
+      <!--li class="nav-item dropdown no-arrow mx-1" >
         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger">7</span>
+            <span class="badge badge-danger">7</span>
+            <i class="fas fa-envelope fa-fw"></i>
+
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
           <a class="dropdown-item" href="#">Action</a>
@@ -76,7 +78,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
-      </li>
+      </li-->
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
@@ -85,10 +87,11 @@
           @endauth
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Settings</a>
-          <a class="dropdown-item" href="#">Activity Log</a>
+          {{-- <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" href="#">Activity Log</a> --}}
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Salir</a>
+          <a class="dropdown-item" href="/" >Inicio</a>
         </div>
       </li>
     </ul>
@@ -135,7 +138,7 @@
           <div class="dropdown-divider"></div>
           <h6 class="dropdown-header">Registro de inmuebles:</h6>
           <a class="dropdown-item" href="/inmuebles">Inmueble</a>
-          <a class="dropdown-item" href="blank.html">"#fotos"</a>
+          {{-- <a class="dropdown-item" href="blank.html">"#fotos"</a> --}}
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -150,6 +153,8 @@
           <a class="dropdown-item" href="/tipopagos">Tipo de pagos</a>
           <div class="dropdown-divider"></div>
           <h6 class="dropdown-header">Transacciones:</h6>
+
+          <a class="dropdown-item" href="/facturass">Todas las Facturas</a>
           <a class="dropdown-item" href="/facturas">Factura</a>
           <a class="dropdown-item" href="/notaventas">Ver Oferta</a>
         </div>
@@ -162,18 +167,23 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">Caracteristicas:</h6>
           <a class="dropdown-item" href="/tipopublicacions">Tipo Publicaciones</a>
-          <a class="dropdown-item" href="/publicacions">#publicacion</a>
-          <a class="dropdown-item" href="/tipopagos">#</a>
-          <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">Transacciones:</h6>
+          <a class="dropdown-item" href="/publicacions">Publicacion</a>
+          <a class="dropdown-item" href="/tipopagos" hidden>#</a>
+          <div class="dropdown-divider" hidden></div>
+          {{-- <h6 class="dropdown-header">Transacciones:</h6>
           <a class="dropdown-item" href="/inmuebles">#</a>
-          <a class="dropdown-item" href="blank.html">"#"</a>
+          <a class="dropdown-item" href="blank.html">"#"</a> --}}
         </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/accesos">
           <i class="fas fa-fw fa-user-tie"></i>
           <span>Gestionar Accesos</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/bitacoras">
+          <i class="fas fa-fw fa-address-book"></i>
+          <span>Bitacora</span></a>
       </li>
 
       <li class="nav-item">
@@ -241,30 +251,40 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+
+            <a class="btn btn-primary" href="#"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+
+          {{-- <a class="btn btn-primary" href="login.html">Logout</a> --}}
         </div>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="/vendor/jquery/jquery.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="{{asset('/vendor/jquery/jquery.js')}}"></script>
+  <script src="{{asset('/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="/vendor/jquery-easing/jquery.easing.js"></script>
+  <script src="{{asset('/vendor/jquery-easing/jquery.easing.js')}}"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="/vendor/chart.js/Chart.js"></script>
-  <script src="/vendor/datatables/jquery.dataTables.js"></script>
-  <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="{{asset('/vendor/chart.js/Chart.js')}}"></script>
+  <script src="{{asset('/vendor/datatables/jquery.dataTables.js')}}"></script>
+  <script src="{{asset('/vendor/datatables/dataTables.bootstrap4.js')}}"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="/js/admin/sb-admin.js"></script>
+  <script src="{{asset('/js/admin/sb-admin.js')}}"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="/js/admin/demo/datatables-demo.js"></script>
-  <script src="/js/admin/demo/chart-area-demo.js"></script>
+  <script src="{{asset('/js/admin/demo/datatables-demo.js')}}"></script>
+  <script src="{{asset('/js/admin/demo/chart-area-demo.js')}}"></script>
 
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

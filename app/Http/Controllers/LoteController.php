@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BitacoraHelper;
 use App\Inmueble;
 use App\Servicio;
 use App\TipoInmueble;
@@ -84,13 +85,15 @@ class LoteController extends Controller
         $inmueble->area_terreno = $request->area_construida+$request->area_libre;
         $inmueble->area_construida =$request->area_construida;
         $inmueble->area_libre=$request->area_libre;
-        // $inmueble->pisos=$request->pisos;
-        // $inmueble->garajes=$request->garajes;
+
         $inmueble->descripcion=$request->descripcion;
 
         // $inmueble->foto_principal=$request->foto_principal;
-        // $inmueble->total_cupo=$request->total_cupos;
-        // $inmueble->cupo_ocupado=$request->cupo_ocupado;
+        $inmueble->total_cupo=0;
+        $inmueble->habitaciones=0;
+        $inmueble->pisos=0;
+        $inmueble->garajes=0;
+        $inmueble->cupo_ocupado=0;
         $inmueble->foto_principal=$newFileName;
         $inmueble->zona_id=$request->zona;
         $inmueble->tipoinmueble_id=$tipoinm->first()->id;
@@ -105,6 +108,7 @@ class LoteController extends Controller
                 $inmueble->servicios()->attach($serv);
             }
         }
+        BitacoraHelper::insertBitacora('Creo un inmueble');
         // dd($inmueble->id);
         // $id=$proyecto->id;
         return redirect('/inmuebles');
@@ -213,7 +217,7 @@ class LoteController extends Controller
         // $post->title = request('title');
         // $post->content = request('post_content');
         // $post->image_url = $newFileName;
-
+        BitacoraHelper::insertBitacora('Actualizo un inmueble');
         // $post->save();
         return redirect('/inmuebles');
     }

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Foto;
+use App\Publicacion;
 use App\Seguimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SeguimientoController extends Controller
 {
@@ -14,7 +17,7 @@ class SeguimientoController extends Controller
      */
     public function index()
     {
-        //
+        dd(1);
     }
 
     /**
@@ -24,7 +27,7 @@ class SeguimientoController extends Controller
      */
     public function create()
     {
-        //
+        dd(2);
     }
 
     /**
@@ -35,7 +38,7 @@ class SeguimientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd(3);
     }
 
     /**
@@ -44,9 +47,21 @@ class SeguimientoController extends Controller
      * @param  \App\Seguimiento  $seguimiento
      * @return \Illuminate\Http\Response
      */
-    public function show(Seguimiento $seguimiento)
+    public function show($id)
     {
-        //
+
+
+        $publicacion=Publicacion::find($id);
+        $seguimiento=new Seguimiento;
+        $seguimiento->descripcion=2;
+        $seguimiento->publicacion_id=$publicacion->id;
+        $seguimiento->user_id=Auth::user()->id;
+        $seguimiento->fechaseguimiento=date('d-m-Y');
+        $seguimiento->save();
+        // dd($publicacion,$seguimiento);
+        $fotos=Foto::where('inmueble_id',$publicacion->inmueble->id)->paginate(3);
+        // dd($fotos);
+        return view('/show',['publicacion'=>$publicacion,'fotos'=>$fotos]);
     }
 
     /**
@@ -55,9 +70,9 @@ class SeguimientoController extends Controller
      * @param  \App\Seguimiento  $seguimiento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Seguimiento $seguimiento)
+    public function edit( $seguimiento)
     {
-        //
+        dd(5);
     }
 
     /**
@@ -67,9 +82,9 @@ class SeguimientoController extends Controller
      * @param  \App\Seguimiento  $seguimiento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seguimiento $seguimiento)
+    public function update(Request $request, $seguimiento)
     {
-        //
+        dd(6);
     }
 
     /**
@@ -78,8 +93,8 @@ class SeguimientoController extends Controller
      * @param  \App\Seguimiento  $seguimiento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seguimiento $seguimiento)
+    public function destroy( $seguimiento)
     {
-        //
+        dd(7);
     }
 }

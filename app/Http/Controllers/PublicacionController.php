@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Foto;
+use App\Helpers\BitacoraHelper;
 use App\Inmueble;
 use App\Publicacion;
 use App\Tipopublicacion;
 use App\TipoUsuario;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -61,14 +63,15 @@ class PublicacionController extends Controller
             'inmueble_id'=>'required|integer',
         ]);
         $UserNVentas=Auth::user()->notaventas;
-        // dd(empty($UserNVentas));
+
         if (!empty($UserNVentas)) {
+            // dd(!empty($UserNVentas));
             foreach ($UserNVentas as $key => $value) {
                 if (Auth::user()->cantidad_publicaciones>0 ) {
                     // dd($UserNVentas->first()->publicacions->count());
-                    if ($value->oferta->numero_publicaciones>$value->publicacions->count() && $value->fecha_final>$fecha) {
+                    if ($value->oferta->numero_publicaciones>$value->publicacions->count()) { //&& $value->fecha_final>$fecha
                         # insertar a esta nota de venta
-
+                        // dd(2);
                         $numero_dias=$value->oferta->duracion;
                         // dd($numero_dias,date("d-m-Y",strtotime($fecha."+ $numero_dias days")));
 
@@ -86,7 +89,10 @@ class PublicacionController extends Controller
                         $publicacion->nota_venta_id= $value->id_nota_ventas;
                         $publicacion->save();
                         $numActual=Auth::user()->cantidad_publicaciones;
-                        Auth::user()->cantidad_publicaciones=$numActual-1;
+                        $user=User::find(Auth::user()->id);
+                        $user->cantidad_publicaciones=$numActual-1;
+                        $user->save();
+                        BitacoraHelper::insertBitacora('Creo una publicacion');
                         return redirect('/inmuebles');
                         // dd($value->id_nota_ventas,$publicacion);
                     }/*else {
@@ -115,7 +121,9 @@ class PublicacionController extends Controller
         // dd($request->role,$tipo->nombre);
         // $publicacion=new Publicacion();
         // dd($request);
-
+        throw ValidationException::withMessages([
+            'num_publicacion'=>'Error de calculo. Compre un plan para poder publicar'
+        ]);
     }
 
     /**
@@ -174,6 +182,7 @@ class PublicacionController extends Controller
         }
         // dd($publi);
         $publi->save();
+        BitacoraHelper::insertBitacora('Actualizo una publicacion');
         return redirect('/publicacions');
     }
 
